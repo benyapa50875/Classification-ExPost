@@ -8,7 +8,7 @@ import os
 
 # Define the function for zero padding
 def zero_padding(array):
-    threshold = 120
+    threshold = 70
     if array.shape[0] > threshold:
         return array[:threshold, :, :]
     elif array.shape[0] < threshold:
