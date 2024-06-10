@@ -78,14 +78,19 @@ if uploaded_file is not None:
         x = zero_padding(landmarks)
         
         x1 = np.expand_dims(x, axis=0)
-        predict = model.predict(x1)
+        st.write("Input shape:", x1.shape)  # Log the input shape
         
-        l_p = list(predict[0])
-        confident = max(l_p)
-        index = l_p.index(confident)
-        
-        st.write("Prediction Results:")
-        st.write(f"Class: {maps[index]}")
-        st.write(f"Confidence: {confident * 100:.2f} %")
-        
-        st.video(temp_file_path)
+        try:
+            predict = model.predict(x1)
+            
+            l_p = list(predict[0])
+            confident = max(l_p)
+            index = l_p.index(confident)
+            
+            st.write("Prediction Results:")
+            st.write(f"Class: {maps[index]}")
+            st.write(f"Confidence: {confident * 100:.2f} %")
+            
+            st.video(temp_file_path)
+        except Exception as e:
+            st.error(f"Error during prediction: {e}")
